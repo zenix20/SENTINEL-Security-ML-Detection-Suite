@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SENTINEL // Security ML Console</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+
+<div class="grid-overlay"></div>
+
+<div class="console">
+
+  <header class="topbar">
+    <div class="brand">
+      <div class="brand-mark"><span class="brand-mark-dot"></span></div>
+      <div class="brand-text">
+        <h1>SENTINEL</h1>
+        <span class="brand-sub">Security ML Console</span>
+      </div>
+    </div>
+    <div class="topbar-stats">
+      <div class="tstat">
+        <span class="tstat-label">Events / window</span>
+        <span class="tstat-value" id="stat-total">—</span>
+      </div>
+      <div class="tstat">
+        <span class="tstat-label">Active alerts</span>
+        <span class="tstat-value alert" id="stat-alerts">—</span>
+      </div>
+      <div class="tstat">
+        <span class="tstat-label">Live match rate</span>
+        <span class="tstat-value good" id="stat-accuracy">—</span>
+      </div>
+    </div>
+    <div class="status-pill">
+      <span class="status-dot"></span><span>LIVE</span>
+    </div>
+  </header>
+
+  <div class="filterbar">
+    <div class="filter-group">
+      <button class="filter-btn active" data-filter="all">
+        <span class="fb-label">ALL SOURCES</span>
+      </button>
+      <button class="filter-btn" data-filter="phishing">
+        <span class="fb-dot amber"></span>
+        <span class="fb-label">PHISHING DETECTOR</span>
+      </button>
+      <button class="filter-btn" data-filter="intrusion">
+        <span class="fb-dot blue"></span>
+        <span class="fb-label">INTRUSION DETECTOR</span>
+      </button>
+    </div>
+    <div class="scan-url-box">
+      <input type="text" id="scan-url-input" placeholder="paste a URL to scan against the phishing model…" autocomplete="off">
+      <button id="scan-url-btn">SCAN</button>
+    </div>
+  </div>
+
+  <main class="main-grid">
+    <section class="feed-panel">
+      <div class="panel-head">
+        <span class="panel-title">LIVE DETECTION FEED</span>
+        <span class="scanline-label">scanning<span class="dotdotdot"></span></span>
+      </div>
+      <div class="feed-scroll" id="feed-scroll">
+        <div class="feed-empty" id="feed-empty">Waiting for first events…</div>
+      </div>
+    </section>
+
+    <aside class="side-col">
+      <div class="module-card">
+        <div class="module-card-head">
+          <span class="fb-dot amber"></span><span>PHISHING DETECTOR</span>
+        </div>
+        <div class="module-metric">
+          <span class="mm-value">97.4<span class="mm-unit">%</span></span>
+          <span class="mm-label">model accuracy</span>
+        </div>
+        <div class="module-bar">
+          <div class="module-bar-fill amber" style="width:96%"></div>
+        </div>
+        <div class="module-foot">96% recall on phishing class · UCI Phishing Dataset</div>
+      </div>
+
+      <div class="module-card">
+        <div class="module-card-head">
+          <span class="fb-dot blue"></span><span>INTRUSION DETECTOR</span>
+        </div>
+        <div class="module-metric">
+          <span class="mm-value">99.9<span class="mm-unit">%</span></span>
+          <span class="mm-label">model accuracy</span>
+        </div>
+        <div class="module-bar">
+          <div class="module-bar-fill blue" style="width:99%"></div>
+        </div>
+        <div class="module-foot">7-class · CICIDS2017</div>
+      </div>
+
+      <div class="module-card legend-card">
+        <div class="module-card-head"><span>SIGNAL KEY</span></div>
+        <div class="legend-row"><span class="dot clear"></span>Normal / Legitimate</div>
+        <div class="legend-row"><span class="dot alert"></span>Attack / Phishing flagged</div>
+        <div class="legend-row"><span class="dot mismatch"></span>Model missed ground truth</div>
+      </div>
+    </aside>
+  </main>
+
+  <footer class="footnote">
+    Phishing: Random Forest · UCI Phishing Websites — Intrusion: Random Forest · CICIDS2017 (replayed held-out test set)
+  </footer>
+</div>
+
+<template id="feed-row-template">
+  <div class="feed-row">
+    <div class="fr-bar"></div>
+    <div class="fr-main">
+      <div class="fr-top">
+        <span class="fr-module"></span>
+        <span class="fr-label"></span>
+        <span class="fr-time"></span>
+      </div>
+      <div class="fr-detail"></div>
+    </div>
+    <div class="fr-confidence">
+      <svg viewBox="0 0 36 36" class="fr-ring">
+        <circle class="fr-ring-bg" cx="18" cy="18" r="15.5"></circle>
+        <circle class="fr-ring-fg" cx="18" cy="18" r="15.5"></circle>
+      </svg>
+      <span class="fr-confidence-value"></span>
+    </div>
+  </div>
+</template>
+
+<script src="/static/app.js"></script>
+</body>
+</html>
