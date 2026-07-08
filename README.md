@@ -1,4 +1,4 @@
-# SENTINEL — Security ML Detection Suite
+# SENTINEL: Security ML Detection Suite
 
 A real-time security threat detection system built with machine learning, featuring a phishing URL detector and a network intrusion classifier, unified into a live SOC-style web dashboard.
 
