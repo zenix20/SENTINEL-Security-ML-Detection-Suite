@@ -35,7 +35,7 @@ security-ml-suite/
 │   └── phishing_feature_columns.pkl  ← feature column order (required for inference)
 ├── intrusion/
 │   ├── predict.py                    ← replay-based inference
-│   ├── intrusion_model.pkl           ← trained Random Forest
+│   ├── intrusion_model.pkl           ← trained Random Forest (not included — 31MB exceeds upload limit; retrain using intrusion.ipynb)
 │   ├── intrusion_feature_columns.pkl ← feature column order
 │   └── intrusion_label_mapping.pkl   ← int → attack type label
 ├── notebooks/
